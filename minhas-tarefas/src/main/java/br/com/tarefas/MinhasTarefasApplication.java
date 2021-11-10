@@ -1,13 +1,13 @@
-package br.com.uniciv.contatos;
+package br.com.tarefas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ContatosManagerApplication {
+public class MinhasTarefasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ContatosManagerApplication.class, args);
+		SpringApplication.run(MinhasTarefasApplication.class, args);
 	}
 
 }

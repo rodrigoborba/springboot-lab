@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario {
 	
@@ -24,6 +26,7 @@ public class Usuario {
 	private String nome;
 	private String senha;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private List<Tarefa> tarefas;
 	

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.tarefas.model.Tarefa;
+import br.com.tarefas.model.TarefaStatus;
 import br.com.tarefas.repository.TarefaRepository;
 
 @Service
@@ -38,6 +39,12 @@ public class TarefaService {
 		
 	}
 	
+	public Tarefa iniciarTarefaPorId(Integer id) {
+		Tarefa tarefa = consultarPorId(id);
+		tarefa.setStatus(TarefaStatus.EM_ANDAMENTO);
+		tarefaRepository.save(tarefa);
+		return tarefa;
+	}
 	
 
 }

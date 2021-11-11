@@ -1,4 +1,4 @@
-package br.com.tarefas;
+package br.com.tarefas.repository;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.tarefas.model.Tarefa;
-import br.com.tarefas.repository.TarefaRepository;
 
 @SpringBootTest
 public class TarefaRepositoryTest {
@@ -17,9 +16,16 @@ public class TarefaRepositoryTest {
 	private TarefaRepository tarefaRepository;
 	
 	@Test
-	void testFindByDescricao() {
+	void testFindAll() {
 		
-		List<Tarefa> tarefas = tarefaRepository.findByDescricaoLike("tarefa");
+		List<Tarefa> tarefas = tarefaRepository.findAll();
+		Assertions.assertEquals(1, tarefas.size());
+	}
+	
+	@Test
+	void testFindByDescricaoLike() {
+		
+		List<Tarefa> tarefas = tarefaRepository.findByDescricaoLike("%tarefa %");
 		Assertions.assertEquals(1, tarefas.size());
 	}
 	

@@ -17,7 +17,8 @@ import br.com.tarefas.repository.TarefaRepository;
 import br.com.tarefas.repository.UsuarioRepository;
 
 @Configuration
-@Profile("dev")
+//@Profile({"local","dev"})
+@Profile("!prod")
 public class CarregarBaseDados {
 	
 	@Autowired

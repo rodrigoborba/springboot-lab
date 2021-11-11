@@ -38,11 +38,11 @@ public class CarregarBaseDados {
 			usuarioRepository.save(usuario);
 			
 			TarefaCategoria categoria = new TarefaCategoria();
-			categoria.setNome("categoria 1 ");
+			categoria.setNome("categoria 1");
 			tarefaCategoriaRepository.save(categoria);
 			
 			Tarefa tarefa = new Tarefa();
-			tarefa.setDescricao("tarefa 1 ");
+			tarefa.setDescricao("tarefa 1");
 			tarefa.setDataEntrega(LocalDate.now().plusDays(1));
 			tarefa.setStatus(TarefaStatus.ABERTO);
 			tarefa.setVisivel(true);

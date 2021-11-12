@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.sql.rowset.serial.SerialArray;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tarefas.controller.request.TarefaRequest;
 import br.com.tarefas.controller.response.TarefaResponse;
 import br.com.tarefas.model.Tarefa;
 import br.com.tarefas.service.TarefaService;
@@ -57,7 +57,8 @@ public class TarefaController {
 	}
 	
 	@PostMapping("/tarefa")
-	public TarefaResponse salvarTarefa(@Valid @RequestBody Tarefa tarefa) {
+	public TarefaResponse salvarTarefa(@Valid @RequestBody TarefaRequest tarefaRequest) {
+		Tarefa tarefa = mapper.map(tarefaRequest, Tarefa.class);
 		return mapper.map(tarefaService.salvar(tarefa), TarefaResponse.class);
 	}
 	

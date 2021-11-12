@@ -56,7 +56,7 @@ public class TarefaService {
 		Tarefa tarefa = consultarPorId(id);
 		
 		if(TarefaStatus.CANCELADA.equals(tarefa.getStatus())) {
-			throw new TarefaStatusException();
+			throw new TarefaStatusException("Não é possível concluir uma tarefa cancelada");
 		}
 		
 		tarefa.setStatus(TarefaStatus.CONCLUIDA);
@@ -67,8 +67,8 @@ public class TarefaService {
 	public Tarefa cancelarTarefaPorId(Integer id) {
 		Tarefa tarefa = consultarPorId(id);
 		
-		if(TarefaStatus.CANCELADA.equals(tarefa.getStatus())) {
-			throw new TarefaStatusException();
+		if(TarefaStatus.CONCLUIDA.equals(tarefa.getStatus())) {
+			throw new TarefaStatusException("Não é possível cancelar uma tarefa concluída");
 		}
 		
 		tarefa.setStatus(TarefaStatus.CANCELADA);

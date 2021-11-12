@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.com.tarefas.exception.TarefaStatusException;
 import br.com.tarefas.model.Tarefa;
 import br.com.tarefas.model.TarefaStatus;
 
@@ -20,4 +21,13 @@ public class TarefaServiceTest {
 		Assertions.assertEquals(TarefaStatus.EM_ANDAMENTO, tarefa.getStatus());
 	}
 
+	@Test
+	void naoDeveIniciarTarefaTest() {
+		Tarefa tarefa = tarefaService.consultarPorId(3);
+		tarefa.setStatus(TarefaStatus.CONCLUIDA);
+		tarefaService.salvar(tarefa);
+		
+		Assertions.assertThrows(TarefaStatusException.class ,() -> tarefaService.iniciarTarefaPorId(3));
+	}
+	
 }

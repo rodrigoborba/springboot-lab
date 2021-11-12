@@ -1,33 +1,40 @@
 package br.com.tarefas.service;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.tarefas.exception.TarefaStatusException;
 import br.com.tarefas.model.Tarefa;
 import br.com.tarefas.model.TarefaStatus;
+import br.com.tarefas.repository.TarefaRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TarefaServiceTest {
 	
-	@Autowired
-	private TarefaService tarefaService;
+	@Mock
+	private TarefaRepository tarefaRepository;
+	
+	@InjectMocks
+	private TarefaService service;
 	
 	@Test
-	void deveIniciarTarefaTest() {
-		Tarefa tarefa = tarefaService.iniciarTarefaPorId(3);
-		Assertions.assertEquals(TarefaStatus.EM_ANDAMENTO, tarefa.getStatus());
+	void naoDeveConcluirTarefa() {
+		
+		Tarefa tarefa = new Tarefa();
+		tarefa.setId(1);
+		tarefa.setDescricao("teste 1 ");
+		tarefa.setStatus(TarefaStatus.CANCELADA);
+		
+		Mockito.when(tarefaRepository.findById(1)).thenReturn(Optional.of(tarefa ));
+		
+		Assertions.assertThrows(TarefaStatusException.class, () -> service.concluirTarefaPorId(1));
 	}
 
-	@Test
-	void naoDeveIniciarTarefaTest() {
-		Tarefa tarefa = tarefaService.consultarPorId(3);
-		tarefa.setStatus(TarefaStatus.CONCLUIDA);
-		tarefaService.salvar(tarefa);
-		
-		Assertions.assertThrows(TarefaStatusException.class ,() -> tarefaService.iniciarTarefaPorId(3));
-	}
-	
 }

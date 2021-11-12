@@ -52,5 +52,29 @@ public class TarefaService {
 		return tarefa;
 	}
 	
+	public Tarefa concluirTarefaPorId(Integer id) {
+		Tarefa tarefa = consultarPorId(id);
+		
+		if(TarefaStatus.CANCELADA.equals(tarefa.getStatus())) {
+			throw new TarefaStatusException();
+		}
+		
+		tarefa.setStatus(TarefaStatus.CONCLUIDA);
+		tarefaRepository.save(tarefa);
+		return tarefa;
+	}
+	
+	public Tarefa cancelarTarefaPorId(Integer id) {
+		Tarefa tarefa = consultarPorId(id);
+		
+		if(TarefaStatus.CANCELADA.equals(tarefa.getStatus())) {
+			throw new TarefaStatusException();
+		}
+		
+		tarefa.setStatus(TarefaStatus.CANCELADA);
+		tarefaRepository.save(tarefa);
+		return tarefa;
+	}
+	
 
 }

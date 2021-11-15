@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.com.tarefas.exception.TarefaStatusException;
 import br.com.tarefas.model.Tarefa;
 import br.com.tarefas.model.TarefaStatus;
+import br.com.tarefas.services.TarefaService;
 
 @SpringBootTest
 public class TarefaServiceIntegrationTest {

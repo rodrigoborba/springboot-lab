@@ -1,4 +1,4 @@
-package br.com.tarefas.service;
+package br.com.tarefas.services;
 
 import java.util.List;
 

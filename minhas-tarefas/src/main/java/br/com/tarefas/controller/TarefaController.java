@@ -29,7 +29,7 @@ import br.com.tarefas.controller.assembler.TarefaModelAssembler;
 import br.com.tarefas.controller.request.TarefaRequest;
 import br.com.tarefas.controller.response.TarefaResponse;
 import br.com.tarefas.model.Tarefa;
-import br.com.tarefas.service.TarefaService;
+import br.com.tarefas.services.TarefaService;
 
 @RestController
 @RequestMapping("/tarefa")

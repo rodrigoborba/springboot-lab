@@ -1,5 +1,7 @@
 package br.com.tarefas.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +12,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Role {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -18,6 +20,15 @@ public class Role {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
 	private ERole name;
+	
+	public Role() {
+		super();
+	}
+	
+	public Role(ERole name) {
+		super();
+		this.name = name;
+	}
 
 	public Integer getId() {
 		return id;
@@ -33,6 +44,23 @@ public class Role {
 
 	public void setName(ERole name) {
 		this.name = name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		return Objects.equals(id, other.id);
 	}
 	
 	

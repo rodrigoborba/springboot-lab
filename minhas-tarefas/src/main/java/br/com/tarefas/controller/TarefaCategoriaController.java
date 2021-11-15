@@ -22,7 +22,7 @@ import br.com.tarefas.controller.assembler.TarefaCategoriaModelAssembler;
 import br.com.tarefas.controller.request.TarefaCategoriaRequest;
 import br.com.tarefas.controller.response.TarefaCategoriaResponse;
 import br.com.tarefas.model.TarefaCategoria;
-import br.com.tarefas.service.TarefaCategoriaService;
+import br.com.tarefas.services.TarefaCategoriaService;
 
 @RestController
 @RequestMapping("/categoria")

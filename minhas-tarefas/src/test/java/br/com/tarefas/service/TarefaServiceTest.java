@@ -14,6 +14,7 @@ import br.com.tarefas.exception.TarefaStatusException;
 import br.com.tarefas.model.Tarefa;
 import br.com.tarefas.model.TarefaStatus;
 import br.com.tarefas.repository.TarefaRepository;
+import br.com.tarefas.services.TarefaService;
 
 @ExtendWith(MockitoExtension.class)
 public class TarefaServiceTest {

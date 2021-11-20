@@ -10,6 +10,8 @@ import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,7 +23,7 @@ import br.com.tarefas.controller.response.ErroResponse;
 import br.com.tarefas.exception.TarefaStatusException;
 
 @RestControllerAdvice
-public class CustomGloablExceptionHandler extends ResponseEntityExceptionHandler {
+public class CustomGloabalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(EntityNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
@@ -50,5 +52,12 @@ public class CustomGloablExceptionHandler extends ResponseEntityExceptionHandler
 		
 		return ResponseEntity.badRequest().body(errors);
 	}
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	ErroResponse entityBadCredentialsException(BadCredentialsException ex) {
+		return new ErroResponse("Nome de usuário e/ ou senha inválidos");
+	}
+	
 
 }

@@ -26,6 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	
+	@Autowired
+	private AuthEntryPointJWT unauthorizedHandler;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -74,7 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/h2-console/**").permitAll()
 				.anyRequest().authenticated()
 			.and()
-				.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+				.addFilterBefore(
+						authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
 	}
 
 }
